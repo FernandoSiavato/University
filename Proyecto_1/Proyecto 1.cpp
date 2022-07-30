@@ -7,7 +7,7 @@ main(){
     int cInteraccion=0,interaccionX=0,interacionY=0; // Cantidad de interacciones y la interacci[on en x y y.
     int sentidoMC1X=0, sentidoMC1Y=0 ,sentidoMC2X=0, sentidoMC2Y=0; // Sentido de copia 1 y 2
     int marioC1X=0,marioC1Y=0,marioC2X=0,marioC2Y=0; // Coord de las copias
-    bool C1=false,C2=false,C3=false,C4=false,C0=false,deadmonster1=false,deadmonster2=false,deadmonster3=false;
+    bool deadmonster1=false,deadmonster2=false,deadmonster3=false;
     int cMonster=0, monsterX1=0,monsterY1=0,monsterVida1=0; // Monster1
     int monsterX2=0,monsterY2=0,monsterVida2=0; // Monster2
     int monsterX3=0,monsterY3=0,monsterVida3=0; // Monster2
@@ -33,6 +33,28 @@ main(){
     cout<<"Digite el sentido de la 2da copia de Mario ";
         cin>>sentidoMC2X>>sentidoMC2Y;
 
+        if (!((sentidoMOX == 1) && (sentidoMOX == -1))){
+
+            cout<<"\nError en la entrada";
+        }else if (!((sentidoMOY == 1) && (sentidoMOY == -1))){
+
+            cout<<"\nError en la entrada";
+        }else if (!((sentidoMC1X == 1) && (sentidoMC1X == -1))){
+
+            cout<<"\nError en la entrada";
+        }else if (!((sentidoMC1Y == 1) && (sentidoMC1Y == -1))){
+
+            cout<<"\nError en la entrada";
+        }else if (!((sentidoMC2X == 1) && (sentidoMC2X == -1))){
+
+            cout<<"\nError en la entrada";
+        }else if (!((sentidoMC2Y == 1) && (sentidoMC2Y == -1))){
+
+            cout<<"\nError en la entrada";
+        }
+
+
+
 
        // Cantidad de SCRUTTLEBUGS
             fflush(stdin);
@@ -56,7 +78,7 @@ main(){
                 }
             }
         }else{
-                cout<<"Algo esta mal en la creacion de los moster";
+                cout<<"\nError en la entrada";
             }
 
 
@@ -76,7 +98,7 @@ fflush(stdin);
 
             cout<<"\nDiga las lineas de Movimiento del Mario Original "<<"["<<i<<"] ";
                 cin>>interaccionX>>interacionY;
- 
+
             iniciaMOX+=(interaccionX*(sentidoMOX));
             iniciaMOY+=(interacionY*(sentidoMOY));
 
@@ -85,29 +107,24 @@ fflush(stdin);
 
             if((iniciaMOX == 0) && (iniciaMOY == 0) ){ // Si introduce esto debe salir algun error o hasta parar el programa.
                 cout<<"cuadrante errado";
-                C0=true;
             }
             else if((iniciaMOX >= 0) && (iniciaMOY >= 0)){ //"Cuadrante 1", el sentido del movimiento de las copias no cambiará.
-                 C1=true;
             }
             else if((iniciaMOX < 0) && (iniciaMOY >= 0)){ //"Cuadrante 2", el sentido del movimiento de las copias cambiará en el eje X.
                 sentidoMC1X *= (-1);
                 sentidoMC2X *= (-1);
-                C2=true;
             }
             else if((iniciaMOX < 0) && (iniciaMOY < 0)){//"Cuadrante 3", el sentido del movimiento de las copias cambiará en el eje Y.
                 sentidoMC1Y *= (-1);
                 sentidoMC2Y *= (-1);
-                C3=true;
             }
             else if((iniciaMOX >= 0) && (iniciaMOY < 0)){ //"Cuadrante 4", el sentido del movimiento de las copias cambiará en el eje X y Y.
                 sentidoMC1X *= (-1);
                 sentidoMC2Y *= (-1);
                 sentidoMC1Y *= (-1);
                 sentidoMC2X *= (-1);
-                C4=true;
             }else{
-                cout<<"No se cambiaron los sentidos por los cuadrantes";
+                cout<<"\nError en la entrada";
             }
 
         // PARTE QUE COLOCA LAS INTERACCIONES DE MARIO COPIA
@@ -117,42 +134,20 @@ fflush(stdin);
                 marioC2Y+=(interacionY*(sentidoMC2Y));
 
 
-         // PARTE QUE HACE A MARIO SUPER FUERTE POR LA ESTRELLA
-                 if ( (j==1) || (j==2))
-                {
-                    j++; //2 - 3
-                    if (j==3){
-                    ataqueMO = 2;
-                    ataqueMC = 1;
-                    }
-                    
-                } 
-                
-                cout<<"\nCereza vale "<<cerezaX<<" "<<cerezaY<<endl;
 
-                if (((iniciaMOX == cerezaX) && (iniciaMOY == cerezaY)) || ((marioC1X == cerezaX) && (marioC1Y == cerezaY)) || ((marioC2X == cerezaX) && (marioC2Y == cerezaY)))
-                {
-                    cout<<"\nEl Mario es super fuerte";
-                    ataqueMO = 1000;
-                    ataqueMC = 1000;
-                    j++; // 1
-                }
 
-                cout<<"\nAFUERA Mario "<<ataqueMO <<" Copia "<<ataqueMC<<endl;
+
 
         // PARTE EN LA QUE MARIO Y SUS COPIAS TIENEN OPORTUNIDAD PARA MATAR AL MOSTER
 
             if ((cMonster >= 1) && (cMonster <= 3)){
-                cout<<"\nMario Original "<<iniciaMOX <<iniciaMOY<<endl;
-                cout<<"\nMonster "<<monsterX1 <<" "<<monsterY1<<endl;
+
                 
 
-
                     if ((iniciaMOX == monsterX1) && (iniciaMOY == monsterY1)) // Mario original
-                    { cout<<"\nMO Mata a monster 1";
+                    { 
 
                             monsterVida1 -= ataqueMO; // Ataque de 2 puntos
-                            cout<<"\nADENTRO Mario "<<ataqueMO <<" Copia "<<ataqueMC<<endl;
                         if (monsterVida1 <= 0){ // Valida si murio o no
                                 deadmonster1 = true;// Murio el monster
 
@@ -175,8 +170,6 @@ fflush(stdin);
                             deadmonster1 = true;// Murio el monster
                             }
 
-                        }else{
-                            cout<<"\nError en la entrada";
                         }
                     }else if ((marioC1X == monsterX1) && (marioC1Y == monsterY1)){ // Mario copia 1
 
@@ -196,8 +189,6 @@ fflush(stdin);
                             deadmonster1 = true;// Murio el monster
                             }
 
-                        }else{
-                            cout<<"\nError en la entrada";
                         }
 
 
@@ -207,90 +198,143 @@ fflush(stdin);
 
 
 
-                        if (cMonster == 2){
+                        
 
                             if ((iniciaMOX == monsterX2) && (iniciaMOY == monsterY2)) // Mario original
-                            {
-                                    monsterVida2 -= ataqueMO; // Ataque de 2 puntos
-                                    if (monsterVida2 <= 0){ // Valida si murio o no
-                                            deadmonster2 = true;// Murio el monster
+                    { 
+              
 
-                                }else if ((marioC1X == monsterX2) && (marioC1Y == monsterY2)){ // Mario copia 1
+                            monsterVida2 -= ataqueMO; // Ataque de 2 puntos
+                            
+                        if (monsterVida2 <= 0){ // Valida si murio o no
+                                deadmonster2 = true;// Murio el monster
 
-                                    monsterVida2 -= ataqueMC;// Ataque de 1 punto
-                                    if (monsterVida2 <= 0){// Valida si murio o no
-                                        deadmonster2 = true;// Murio el monster
-                                    }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){ // Mario copia 2
-                                        monsterVida2 -= ataqueMC;// Ataque de 1 punto
-                                        if (monsterVida2 <= 0){// Valida si murio o no
-                                        deadmonster2 = true;// Murio el monster
-                                        }
-                                    }
-                                    
-                                }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){// Mario copia 2
+                        }else if ((marioC1X == monsterX2) && (marioC1Y == monsterY2)){ // Mario copia 1
 
-                                    monsterVida2 -= ataqueMC;// Ataque de 1 punto
-                                    if (monsterVida2 <= 0){// Valida si murio o no
-                                    deadmonster2 = true;// Murio el monster
-                                    }
-
-                                }else{
-                                    cout<<"\nError en la entrada";
+                            monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida2 <= 0){// Valida si murio o no
+                                deadmonster2 = true;// Murio el monster
+                            }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){ // Mario copia 2
+                                monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                                if (monsterVida2 <= 0){// Valida si murio o no
+                                deadmonster2 = true;// Murio el monster
                                 }
+                            }
+                            
+                        }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){// Mario copia 2
+
+                            monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida2 <= 0){// Valida si murio o no
+                            deadmonster2 = true;// Murio el monster
                             }
 
                         }
 
+                    }else if ((marioC1X == monsterX2) && (marioC1Y == monsterY2)){ // Mario copia 1
 
-
-
-
-
-
-                             if (cMonster == 3){
-                        
-                                    if ((iniciaMOX == monsterX3) && (iniciaMOY == monsterY3)) // Mario original
-                                        {
-                                            monsterVida3 -= ataqueMO; // Ataque de 2 puntos
-                                            if (monsterVida3 <= 0){ // Valida si murio o no
-                                                    deadmonster3 = true;// Murio el monster
-
-                                        }else if ((marioC1X == monsterX3) && (marioC1Y == monsterY3)){ // Mario copia 1
-
-                                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
-                                            if (monsterVida3 <= 0){// Valida si murio o no
-                                                deadmonster3 = true;// Murio el monster
-                                            }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){ // Mario copia 2
-                                                monsterVida3 -= ataqueMC;// Ataque de 1 punto
-                                                if (monsterVida3 <= 0){// Valida si murio o no
-                                                deadmonster3 = true;// Murio el monster
-                                                }
-                                            }
-                                            
-                                        }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){// Mario copia 2
-
-                                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
-                                            if (monsterVida3 <= 0){// Valida si murio o no
-                                            deadmonster3 = true;// Murio el monster
-                                            }
-
-                                        }else{
-                                            cout<<"\nError en la entrada";
-                                        }
-                                        }
+                            monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida2 <= 0){// Valida si murio o no
+                                deadmonster2 = true;// Murio el monster
+                            }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){ // Mario copia 2
+                                monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                                if (monsterVida2 <= 0){// Valida si murio o no
+                                deadmonster2 = true;// Murio el monster
+                                }
                             }
-                
+                    }else if ((marioC2X == monsterX2) && (marioC2Y == monsterY2)){// Mario copia 2
+
+                            monsterVida2 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida2 <= 0){// Valida si murio o no
+                            deadmonster2 = true;// Murio el monster
+                            }
+
+                        }
+
+                        
+
+
+
+                        
+
+                            if ((iniciaMOX == monsterX3) && (iniciaMOY == monsterY3)) // Mario original
+                    { 
+
+                            monsterVida3 -= ataqueMO; // Ataque de 2 puntos
+                          
+                        if (monsterVida3 <= 0){ // Valida si murio o no
+                                deadmonster3 = true;// Murio el monster
+
+                        }else if ((marioC1X == monsterX3) && (marioC1Y == monsterY3)){ // Mario copia 1
+
+                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida3 <= 0){// Valida si murio o no
+                                deadmonster3 = true;// Murio el monster
+                            }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){ // Mario copia 2
+                                monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                                if (monsterVida3<= 0){// Valida si murio o no
+                                deadmonster3 = true;// Murio el monster
+                                }
+                            }
+                            
+                        }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){// Mario copia 2
+
+                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida3 <= 0){// Valida si murio o no
+                            deadmonster3 = true;// Murio el monster
+                            }
+
+                        }
+
+                    }else if ((marioC1X == monsterX3) && (marioC1Y == monsterY3)){ // Mario copia 1
+
+                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida3 <= 0){// Valida si murio o no
+                                deadmonster3 = true;// Murio el monster
+                            }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){ // Mario copia 2
+                                monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                                if (monsterVida3 <= 0){// Valida si murio o no
+                                deadmonster3 = true;// Murio el monster
+                                }
+                            }
+                    }else if ((marioC2X == monsterX3) && (marioC2Y == monsterY3)){// Mario copia 2
+
+                            monsterVida3 -= ataqueMC;// Ataque de 1 punto
+                            if (monsterVida3 <= 0){// Valida si murio o no
+                            deadmonster3 = true;// Murio el monster
+                            }
+
+                        }
+
             }
-            
-            
-            
+
+
+                     // PARTE QUE HACE A MARIO SUPER FUERTE POR LA ESTRELLA
+               if ( (j==1) || (j==2))
+                {
+                    j++; //2 - 3
+                    if (j==3){
+                    ataqueMO = 2;
+                    ataqueMC = 1;
+                    cerezaX = 5000;
+                    cerezaY = 5000;
+                    }
+                    
+                }
+                
+
+                if (((iniciaMOX == cerezaX) && (iniciaMOY == cerezaY)) || ((marioC1X == cerezaX) && (marioC1Y == cerezaY)) || ((marioC2X == cerezaX) && (marioC2Y == cerezaY)))
+                {
+                    ataqueMO = 100000000000000;
+                    ataqueMC = 100000000000000;
+                    j++; // 1
+                }
+
             
             fflush(stdin);
         // PARTE QUE REUBICAN A LOS MARIOS ORIGINAL Y COPIA, EN LA MISMA POSION QUE MUERE EL MONSTER
-                        cout<<"\nDeaf sera true ? "<<deadmonster1;
                         if (deadmonster1 == true)
                         {
-                            cout<<"\n Aliadao por Monster 1";
+
                             iniciaMOX = monsterX1;
                             iniciaMOY = monsterY1;
                             marioC1X = monsterX1;
@@ -298,8 +342,9 @@ fflush(stdin);
                             marioC2X = monsterX1;
                             marioC2Y = monsterY1;
                             perfectAli=true;
+                            deadmonster1 = false;
                         }else if(deadmonster2 == true){
-                            cout<<"\n Aliadao por Monster 2";
+
                             iniciaMOX = monsterX2;
                             iniciaMOY = monsterY2;
                             marioC1X = monsterX2;
@@ -307,8 +352,9 @@ fflush(stdin);
                             marioC2X = monsterX2;
                             marioC2Y = monsterY2;
                             perfectAli=true;
+                            deadmonster2 = false;
                         }else if (deadmonster3 == true){
-                            cout<<"\n Aliadao por Monster 3";
+
                             iniciaMOX = monsterX3;
                             iniciaMOY = monsterY3;
                             marioC1X = monsterX3;
@@ -316,12 +362,17 @@ fflush(stdin);
                             marioC2X = monsterX3;
                             marioC2Y = monsterY3;
                             perfectAli=true;
-                        }else{
-                            cout<<"\nAlgo salio mal en la muerte del moster";
+                            deadmonster3 = false;
                         }
                         
 
-                if ( perfectAli == true)
+                
+                
+ 
+    }
+    // Salimos de ciclo
+
+    if ( perfectAli == true)
                 {
                     cout<<"\nPerfectamente alineados "<<endl;
                 }else{
@@ -332,42 +383,20 @@ fflush(stdin);
                     cout<<"Posicion de la 2da copia:"<<" ("<<marioC2X<<","<<marioC2Y<<")"<<endl;
                 }
 
-                cout<<"Posicion de la 1era copia:"<<" ("<<marioC1X<<","<<marioC1Y<<")"<<endl;
-
-                cout<<"Posicion de la 2da copia:"<<" ("<<marioC2X<<","<<marioC2Y<<")"<<endl;
-
-
-                if (deadmonster1 == false)
+                if (monsterVida1 > 0)
                 {
                     cout<< "Posicion del Scuttlebug 1:"<<" ("<<monsterX1<<","<<monsterY1<<")"<<";"<<"Vida="<<monsterVida1<<endl;
                 }
 
-                if (deadmonster2 == false)
+                if (monsterVida2 > 0)
                 {
                     cout<< "Posicion del Scuttlebug 2:"<<" ("<<monsterX2<<","<<monsterY2<<")"<<";"<<"Vida="<<monsterVida2<<endl;
                 }
 
-                if (deadmonster3 == false)
+                if (monsterVida3 > 0)
                 {
                     cout<< "Posicion del Scuttlebug 3:"<<" ("<<monsterX3<<","<<monsterY3<<")"<<";"<<"Vida="<<monsterVida3<<endl;
                 }
-                
-                
-         // Esta parte no es necesaria.
-            if (C0 == true){
-                cout<<"\nCuadrante 0 \n";
-            }else if(C1 == true){
-                cout<<"\nCuadrante 1 \n"<<endl;
-            }else if(C2 == true){
-                cout<<"\nCuadrante 2 \n"<<endl;
-            }else if(C3 == true){
-                cout<<"\nCuadrante 3 \n"<<endl;
-            }else if(C4 == true){
-                cout<<"\nCuadrante 4 \n"<<endl;
-            }else{
-                cout<<"\nNo entro \n"<<endl;
-            }
- 
-    }
+
     return 0;
 }
